@@ -46,6 +46,11 @@ class TabController: UITabBarController, UITabBarControllerDelegate {
                 customTabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 customTabBarView.heightAnchor.constraint(equalToConstant: 100)
             ])
+            
+            customTabBarView.layer.shadowColor = UIColor.black.cgColor
+            customTabBarView.layer.shadowOpacity = 0.3
+            customTabBarView.layer.shadowOffset = CGSize(width: 0, height: -3)
+            customTabBarView.layer.shadowRadius = 5
         }
 
         private func createNav(with title: String, and image: UIImage?, vc: UIViewController) -> UINavigationController {

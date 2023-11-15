@@ -10,6 +10,12 @@ import UIKit
 class SearchController: UIViewController {
     
     // MARK: - Property
+    private var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     
     // MARK: - Views
     private lazy var titleLabel: UILabel = {
@@ -33,7 +39,7 @@ class SearchController: UIViewController {
         return view
     }()
     
-    private lazy var chooseIngredientLabel: UITextField = {
+    private lazy var chooseIngredientTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.attributedPlaceholder = NSAttributedString(string: "🔍  Ex. Lemon, Cheese...", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
@@ -46,7 +52,21 @@ class SearchController: UIViewController {
         btn.layer.cornerRadius = 10
         return btn
     }()
-
+    
+    private lazy var clearIngredientButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.layer.cornerRadius = 10
+        return btn
+    }()
+    
+    private lazy var titleTableViewLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        return label
+    }()
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,20 +74,20 @@ class SearchController: UIViewController {
         self.setupStyle()
         self.setupSubViews()
         self.setupLayout()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.register(CustomIngredientCell.self, forCellReuseIdentifier: CustomIngredientCell.cellIdentifier)
+        self.tableView.separatorStyle = .none
+        self.tableView.rowHeight = 70
+        self.tableView.backgroundColor = UIColor.clear
 
-        let startColor = UIColor.white.cgColor
-        let endColor = UIColor(red: 0.97, green: 0.97, blue: 0.98, alpha: 1).cgColor
-
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = [startColor, endColor]
-        gradientLayer.locations = [0.0, 1.0]
-
-        view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     // MARK: - Private
     func setupStyle() {
+        self.view.backgroundColor = .white
+        
         self.titleLabel.text = "Reciplease"
         self.titleLabel.textAlignment = .center
         self.titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
@@ -78,13 +98,22 @@ class SearchController: UIViewController {
         
         self.grayRectangleView.layer.cornerRadius = 10
         
-        self.chooseIngredientLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        self.chooseIngredientTextField.font = UIFont.boldSystemFont(ofSize: 17)
         
         self.addIngredientButton.setTitle("+", for: .normal)
         self.addIngredientButton.backgroundColor = .systemGreen
         self.addIngredientButton.setTitleColor(.white, for: .normal)
         self.addIngredientButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
-        //self.addIngredientButton.addTarget(self, action: #selector(save), for: .touchUpInside)
+        self.addIngredientButton.addTarget(self, action: #selector(add), for: .touchUpInside)
+        
+        self.clearIngredientButton.setTitle("🗑️", for: .normal)
+        self.clearIngredientButton.setTitleColor(.red, for: .normal)
+        self.clearIngredientButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        self.clearIngredientButton.addTarget(self, action: #selector(clearIngredients), for: .touchUpInside)
+
+        self.titleTableViewLabel.text = "Ingredient"
+        self.titleTableViewLabel.textAlignment = .center
+        self.titleTableViewLabel.font = UIFont.boldSystemFont(ofSize: 20)
     }
     
     func setupSubViews() {
@@ -92,8 +121,11 @@ class SearchController: UIViewController {
         self.view.addSubview(self.catchPhraseLabel)
         self.view.addSubview(self.grayRectangleView)
         self.view.addSubview(self.addIngredientButton)
+        self.view.addSubview(self.tableView)
+        self.view.addSubview(self.titleTableViewLabel)
+        self.view.addSubview(self.clearIngredientButton)
         
-        self.grayRectangleView.addSubview(self.chooseIngredientLabel)
+        self.grayRectangleView.addSubview(self.chooseIngredientTextField)
     }
     
     func setupLayout() {
@@ -109,18 +141,81 @@ class SearchController: UIViewController {
             self.grayRectangleView.trailingAnchor.constraint(equalTo: self.addIngredientButton.leadingAnchor, constant: -10),
             self.grayRectangleView.heightAnchor.constraint(equalToConstant: 60),
             
-            self.chooseIngredientLabel.centerYAnchor.constraint(equalTo: self.grayRectangleView.centerYAnchor),
-            self.chooseIngredientLabel.leadingAnchor.constraint(equalTo: self.grayRectangleView.leadingAnchor, constant: 20),
-
+            self.chooseIngredientTextField.centerYAnchor.constraint(equalTo: self.grayRectangleView.centerYAnchor),
+            self.chooseIngredientTextField.leadingAnchor.constraint(equalTo: self.grayRectangleView.leadingAnchor, constant: 20),
+            
             self.addIngredientButton.topAnchor.constraint(equalTo: self.catchPhraseLabel.bottomAnchor, constant: 30),
             self.addIngredientButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30),
             self.addIngredientButton.heightAnchor.constraint(equalToConstant: 60),
             self.addIngredientButton.widthAnchor.constraint(equalToConstant: 60),
+            
+            self.clearIngredientButton.topAnchor.constraint(equalTo: self.grayRectangleView.bottomAnchor, constant: 20),
+            self.clearIngredientButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30),
+            self.clearIngredientButton.heightAnchor.constraint(equalToConstant: 40),
+            self.clearIngredientButton.widthAnchor.constraint(equalToConstant: 60),
+            
+            self.tableView.topAnchor.constraint(equalTo: self.titleTableViewLabel.bottomAnchor, constant: 20),
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -30),
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            
+            self.titleTableViewLabel.topAnchor.constraint(equalTo: self.grayRectangleView.bottomAnchor, constant: 30),
+            self.titleTableViewLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
+
         ])
     }
-
+    
     // MARK: - Action
-
+    @objc func add() {
+        guard let name = chooseIngredientTextField.text, !name.isEmpty else {
+            return
+        }
+        
+        let ingredient = Ingredient(name: name)
+        
+        IngredientService.shared.add(ingredient: ingredient)
+        
+        tableView.reloadData()
+        
+        chooseIngredientTextField.text = ""
+        
+        print("test")
+    }
+    
+    @objc func clearIngredients() {
+        IngredientService.shared.deleteAllIngredients()
+        tableView.reloadData()
+    }
+    
     // MARK: - Core
-
 }
+
+extension SearchController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return IngredientService.shared.ingredients.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomIngredientCell.cellIdentifier, for: indexPath) as! CustomIngredientCell
+        
+        let ingredient = IngredientService.shared.ingredients[indexPath.row]
+        
+        cell.ingredientLabel.text = ingredient.name
+        //cell.textLabel?.text = ingredient.name
+        
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    // Le delegate de textField n'est pas appelé
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+}
+
