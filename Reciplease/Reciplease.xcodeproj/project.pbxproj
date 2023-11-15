@@ -10,6 +10,7 @@
 		CD5931042B02A56E002E40E3 /* IngredientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5931032B02A56E002E40E3 /* IngredientService.swift */; };
 		CD5931062B02A5CA002E40E3 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5931052B02A5CA002E40E3 /* Ingredient.swift */; };
 		CD5931092B02C0E8002E40E3 /* CustomIngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5931082B02C0E8002E40E3 /* CustomIngredientCell.swift */; };
+		CD59310B2B0490E4002E40E3 /* RecipesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD59310A2B0490E4002E40E3 /* RecipesController.swift */; };
 		CD605E212AFD923100B55C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD605E202AFD923100B55C78 /* AppDelegate.swift */; };
 		CD605E232AFD923100B55C78 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD605E222AFD923100B55C78 /* SceneDelegate.swift */; };
 		CD605E2A2AFD923200B55C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD605E292AFD923200B55C78 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		CD5931032B02A56E002E40E3 /* IngredientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientService.swift; sourceTree = "<group>"; };
 		CD5931052B02A5CA002E40E3 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		CD5931082B02C0E8002E40E3 /* CustomIngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIngredientCell.swift; sourceTree = "<group>"; };
+		CD59310A2B0490E4002E40E3 /* RecipesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesController.swift; sourceTree = "<group>"; };
 		CD605E1D2AFD923100B55C78 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD605E202AFD923100B55C78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD605E222AFD923100B55C78 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				CD605E3E2AFDFC4700B55C78 /* FavoriteController.swift */,
 				CD605E402AFDFF0000B55C78 /* SettingsController.swift */,
 				CD605E432AFE15E500B55C78 /* TabController.swift */,
+				CD59310A2B0490E4002E40E3 /* RecipesController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			files = (
 				CD5931092B02C0E8002E40E3 /* CustomIngredientCell.swift in Sources */,
 				CD605E3D2AFDFC0000B55C78 /* SearchController.swift in Sources */,
+				CD59310B2B0490E4002E40E3 /* RecipesController.swift in Sources */,
 				CD605E442AFE15E500B55C78 /* TabController.swift in Sources */,
 				CD605E412AFDFF0000B55C78 /* SettingsController.swift in Sources */,
 				CD605E212AFD923100B55C78 /* AppDelegate.swift in Sources */,

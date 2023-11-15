@@ -60,6 +60,13 @@ class SearchController: UIViewController {
         return btn
     }()
     
+    private lazy var searchForRecipesButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.layer.cornerRadius = 10
+        return btn
+    }()
+    
     private lazy var titleTableViewLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -114,6 +121,12 @@ class SearchController: UIViewController {
         self.titleTableViewLabel.text = "Ingredient"
         self.titleTableViewLabel.textAlignment = .center
         self.titleTableViewLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        self.searchForRecipesButton.setTitle("Search for recipes", for: .normal)
+        self.searchForRecipesButton.setTitleColor(.white, for: .normal)
+        self.searchForRecipesButton.backgroundColor = .systemIndigo
+        self.searchForRecipesButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        self.searchForRecipesButton.addTarget(self, action: #selector(searchForRecipes), for: .touchUpInside)
     }
     
     func setupSubViews() {
@@ -124,6 +137,7 @@ class SearchController: UIViewController {
         self.view.addSubview(self.tableView)
         self.view.addSubview(self.titleTableViewLabel)
         self.view.addSubview(self.clearIngredientButton)
+        self.view.addSubview(self.searchForRecipesButton)
         
         self.grayRectangleView.addSubview(self.chooseIngredientTextField)
     }
@@ -157,11 +171,15 @@ class SearchController: UIViewController {
             self.tableView.topAnchor.constraint(equalTo: self.titleTableViewLabel.bottomAnchor, constant: 20),
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,constant: -30),
-            self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            self.tableView.bottomAnchor.constraint(equalTo: self.searchForRecipesButton.topAnchor, constant: -30),
             
             self.titleTableViewLabel.topAnchor.constraint(equalTo: self.grayRectangleView.bottomAnchor, constant: 30),
             self.titleTableViewLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
-
+            
+            self.searchForRecipesButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -130),
+            self.searchForRecipesButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.searchForRecipesButton.heightAnchor.constraint(equalToConstant: 40),
+            self.searchForRecipesButton.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
     
@@ -178,13 +196,16 @@ class SearchController: UIViewController {
         tableView.reloadData()
         
         chooseIngredientTextField.text = ""
-        
-        print("test")
     }
     
     @objc func clearIngredients() {
         IngredientService.shared.deleteAllIngredients()
         tableView.reloadData()
+    }
+    
+    @objc func searchForRecipes() {
+        let recipesController = RecipesController()
+        self.navigationController?.pushViewController(recipesController, animated: false)
     }
     
     // MARK: - Core
