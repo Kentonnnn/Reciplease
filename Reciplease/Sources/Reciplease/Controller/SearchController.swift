@@ -223,7 +223,6 @@ extension SearchController: UITableViewDataSource, UITableViewDelegate {
         let ingredient = IngredientService.shared.ingredients[indexPath.row]
         
         cell.ingredientLabel.text = ingredient.name
-        //cell.textLabel?.text = ingredient.name
         
         return cell
     }
