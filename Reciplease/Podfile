@@ -1,5 +1,7 @@
 # Podfile
+
 target 'Reciplease' do
   use_frameworks!
   pod 'Alamofire'
+  pod 'AlamofireImage'
 end
