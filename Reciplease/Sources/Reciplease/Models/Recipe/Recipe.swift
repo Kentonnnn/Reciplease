@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Recipe {
+struct RecipeItemModel {
     var name = ""
 }

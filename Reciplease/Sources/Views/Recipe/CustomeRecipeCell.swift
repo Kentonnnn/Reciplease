@@ -15,6 +15,8 @@ class CustomRecipeCell: UITableViewCell {
     
     let recipeLabel = UILabel()
     
+    let recipeImageView = UIImageView()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupStyle()
@@ -31,19 +33,29 @@ class CustomRecipeCell: UITableViewCell {
     
     private func setupStyle() {
         self.containerView.backgroundColor = UIColor(red: 0.96, green: 0.97, blue: 0.97, alpha: 1)
-        self.layer.cornerRadius = 10
-        self.containerView.layer.cornerRadius = 10
+        //self.containerView.layer.cornerRadius = 10
+        
+        //self.layer.cornerRadius = 10
         self.clipsToBounds = true
+        
+        self.recipeLabel.textColor = .white
+        self.recipeLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        self.recipeLabel.numberOfLines = 2                  // ça ne marche pas
+        self.recipeLabel.lineBreakMode = .byWordWrapping    // ça ne marche pas
+        
+        self.recipeImageView.contentMode = .scaleAspectFill
+        self.recipeImageView.clipsToBounds = true
     }
     
     func setupView() {
+        self.containerView.addSubview(recipeImageView)
         self.containerView.addSubview(recipeLabel)
         
         self.contentView.addSubview(containerView)
         
         self.containerView.translatesAutoresizingMaskIntoConstraints = false
         self.recipeLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        self.recipeImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setupLayout() {
@@ -53,8 +65,14 @@ class CustomRecipeCell: UITableViewCell {
             self.containerView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
             self.containerView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
             
-            self.recipeLabel.centerYAnchor.constraint(equalTo: self.containerView.centerYAnchor),
-            self.recipeLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 10)
+            self.recipeImageView.topAnchor.constraint(equalTo: self.containerView.topAnchor),
+            self.recipeImageView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor),
+            self.recipeImageView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor),
+            self.recipeImageView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor),
+            
+            self.recipeLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 10),
+            self.recipeLabel.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -10)
         ])
     }
 }
+

@@ -11,9 +11,13 @@ class RecipeService {
     static let shared = RecipeService()
     private init() {}
     
-    private(set) var recipes: [Recipe] = []
+    private(set) var recipes: [Recipes] = []
     
-    func add(recipe: Recipe) {
+    func add(recipe: Recipes) {
         recipes.append(recipe)
+    }
+    
+    func setRecipes(_ recipes: [Recipes]) {
+        self.recipes = recipes
     }
 }

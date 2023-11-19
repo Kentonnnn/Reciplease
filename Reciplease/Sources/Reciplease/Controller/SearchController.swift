@@ -206,6 +206,8 @@ class SearchController: UIViewController {
     @objc func searchForRecipes() {
         let recipesController = RecipesController()
         self.navigationController?.pushViewController(recipesController, animated: false)
+        
+        recipesController.searchForRecipes()
     }
     
     // MARK: - Core
