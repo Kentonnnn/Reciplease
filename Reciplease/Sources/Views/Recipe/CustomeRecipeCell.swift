@@ -40,8 +40,8 @@ class CustomRecipeCell: UITableViewCell {
         
         self.recipeLabel.textColor = .white
         self.recipeLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        self.recipeLabel.numberOfLines = 2                  // ça ne marche pas
-        self.recipeLabel.lineBreakMode = .byWordWrapping    // ça ne marche pas
+        self.recipeLabel.numberOfLines = 1                 // ça ne marche pas
+        self.recipeLabel.lineBreakMode = .byTruncatingTail    // ça ne marche pas
         
         self.recipeImageView.contentMode = .scaleAspectFill
         self.recipeImageView.clipsToBounds = true
@@ -71,6 +71,7 @@ class CustomRecipeCell: UITableViewCell {
             self.recipeImageView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor),
             
             self.recipeLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 10),
+            self.recipeLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.containerView.trailingAnchor, constant: -10),
             self.recipeLabel.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -10)
         ])
     }
