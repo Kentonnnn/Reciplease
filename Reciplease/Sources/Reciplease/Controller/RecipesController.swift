@@ -37,7 +37,7 @@ class RecipesController: UIViewController {
         self.tableView.delegate = self
         self.tableView.register(CustomRecipeCell.self, forCellReuseIdentifier: CustomRecipeCell.cellIdentifier)
         self.tableView.separatorStyle = .none
-        self.tableView.rowHeight = 120
+        self.tableView.rowHeight = 153
         self.tableView.backgroundColor = UIColor.clear
     }
     
@@ -105,6 +105,14 @@ extension RecipesController: UITableViewDataSource, UITableViewDelegate {
         } else {
             
             cell.recipeImageView.image = UIImage(named: "defaultImage")
+        }
+        
+        cell.ingredientLabel.text = recipe.ingredientLines.joined(separator: ", ")
+        
+        if let totalTime = recipe.totalTime {
+            cell.totalTimeLabel.text = "\(totalTime) mn"
+        } else {
+            cell.totalTimeLabel.text = "N/A"
         }
         
         return cell

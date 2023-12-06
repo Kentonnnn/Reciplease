@@ -24,6 +24,10 @@ class CustomRecipeCell: UITableViewCell {
     
     let recipeImageView = UIImageView()
     
+    let ingredientLabel = UILabel()
+    
+    let totalTimeLabel = UILabel()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupStyle()
@@ -48,14 +52,26 @@ class CustomRecipeCell: UITableViewCell {
         self.recipeLabel.numberOfLines = 1
         self.recipeLabel.lineBreakMode = .byTruncatingTail
         
+        self.ingredientLabel.textColor = .white
+        self.ingredientLabel.font = UIFont.boldSystemFont(ofSize: 10)
+        self.ingredientLabel.numberOfLines = 1
+        self.ingredientLabel.lineBreakMode = .byTruncatingTail
+        
         self.recipeImageView.contentMode = .scaleAspectFill
         self.recipeImageView.clipsToBounds = true
+        
+        self.totalTimeLabel.backgroundColor = .black
+        self.totalTimeLabel.textColor = .white
+        self.totalTimeLabel.textAlignment = .center
+        self.totalTimeLabel.font = UIFont.boldSystemFont(ofSize: 13)
     }
     
     func setupView() {
         self.containerView.addSubview(self.recipeImageView)
         self.containerView.addSubview(self.blackRectangleView)
         self.containerView.addSubview(self.recipeLabel)
+        self.containerView.addSubview(self.ingredientLabel)
+        self.containerView.addSubview(self.totalTimeLabel)
         
         self.contentView.addSubview(self.containerView)
         
@@ -63,6 +79,9 @@ class CustomRecipeCell: UITableViewCell {
         self.recipeLabel.translatesAutoresizingMaskIntoConstraints = false
         self.recipeImageView.translatesAutoresizingMaskIntoConstraints = false
         self.blackRectangleView.translatesAutoresizingMaskIntoConstraints = false
+        self.ingredientLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.totalTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+
     }
     
     func setupLayout() {
@@ -80,11 +99,21 @@ class CustomRecipeCell: UITableViewCell {
             self.blackRectangleView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor),
             self.blackRectangleView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor),
             self.blackRectangleView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor),
-            self.blackRectangleView.heightAnchor.constraint(equalToConstant: 30),
+            self.blackRectangleView.heightAnchor.constraint(equalToConstant: 40),
             
             self.recipeLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 10),
             self.recipeLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.containerView.trailingAnchor, constant: -10),
-            self.recipeLabel.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -5)
+            self.recipeLabel.topAnchor.constraint(equalTo: self.blackRectangleView.topAnchor, constant: 5),
+            
+            self.ingredientLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 10),
+            self.ingredientLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.containerView.trailingAnchor, constant: -10),
+            self.ingredientLabel.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -5),
+                    
+            //self.totalTimeLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 10),
+            self.totalTimeLabel.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -10),
+            self.totalTimeLabel.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 10),
+            self.totalTimeLabel.heightAnchor.constraint(equalToConstant: 40),
+            self.totalTimeLabel.widthAnchor.constraint(equalToConstant: 60)
         ])
     }
 }
