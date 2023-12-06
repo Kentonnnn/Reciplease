@@ -109,7 +109,6 @@ class CustomRecipeCell: UITableViewCell {
             self.ingredientLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.containerView.trailingAnchor, constant: -10),
             self.ingredientLabel.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -5),
                     
-            //self.totalTimeLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 10),
             self.totalTimeLabel.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -10),
             self.totalTimeLabel.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 10),
             self.totalTimeLabel.heightAnchor.constraint(equalToConstant: 40),
