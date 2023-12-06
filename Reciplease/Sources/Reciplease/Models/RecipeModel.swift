@@ -20,7 +20,8 @@ struct Recipes: Decodable {
     let image: String?
     let ingredientLines: [String]
     let totalTime: Int?
-    // essayer de trouver la note de la recette 
+    // trouver la note de la recette
+    // toruver le lien pour chaque recette
 }
 
 
