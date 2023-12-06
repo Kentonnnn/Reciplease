@@ -126,4 +126,16 @@ extension RecipesController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedRecipe = RecipeService.shared.recipes[indexPath.row]
+        
+        let recipeDetailsController = RecipeDetailsController()
+        
+        recipeDetailsController.recipe = selectedRecipe
+        
+        self.navigationController?.pushViewController(recipeDetailsController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

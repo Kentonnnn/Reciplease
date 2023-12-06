@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1CF68F38F589D9D87A9C9637 /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD0F13F7DED260E997B1BC /* Pods_Reciplease.framework */; };
+		CD3168F52B20DD2200015932 /* RecipeDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3168F42B20DD2200015932 /* RecipeDetailsController.swift */; };
+		CD3168F82B20E5AF00015932 /* CustomRecipeIngredientsDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3168F72B20E5AF00015932 /* CustomRecipeIngredientsDetails.swift */; };
 		CD5931042B02A56E002E40E3 /* IngredientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5931032B02A56E002E40E3 /* IngredientService.swift */; };
 		CD5931062B02A5CA002E40E3 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5931052B02A5CA002E40E3 /* Ingredient.swift */; };
 		CD5931092B02C0E8002E40E3 /* CustomIngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD5931082B02C0E8002E40E3 /* CustomIngredientCell.swift */; };
@@ -30,6 +32,8 @@
 /* Begin PBXFileReference section */
 		1B553A4868351960142CF6BF /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 		BB0B212C8BFFB436F8EF72F0 /* Pods-Reciplease.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.debug.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.debug.xcconfig"; sourceTree = "<group>"; };
+		CD3168F42B20DD2200015932 /* RecipeDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsController.swift; sourceTree = "<group>"; };
+		CD3168F72B20E5AF00015932 /* CustomRecipeIngredientsDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRecipeIngredientsDetails.swift; sourceTree = "<group>"; };
 		CD5931032B02A56E002E40E3 /* IngredientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientService.swift; sourceTree = "<group>"; };
 		CD5931052B02A5CA002E40E3 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		CD5931082B02C0E8002E40E3 /* CustomIngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIngredientCell.swift; sourceTree = "<group>"; };
@@ -70,7 +74,6 @@
 				BB0B212C8BFFB436F8EF72F0 /* Pods-Reciplease.debug.xcconfig */,
 				1B553A4868351960142CF6BF /* Pods-Reciplease.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -80,6 +83,14 @@
 				FFBD0F13F7DED260E997B1BC /* Pods_Reciplease.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD3168F62B20E58100015932 /* RecipeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				CD3168F72B20E5AF00015932 /* CustomRecipeIngredientsDetails.swift */,
+			);
+			path = RecipeDetails;
 			sourceTree = "<group>";
 		};
 		CD5931072B02C0D8002E40E3 /* Cell */ = {
@@ -175,6 +186,7 @@
 		CD605E372AFD931900B55C78 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CD3168F62B20E58100015932 /* RecipeDetails */,
 				CD5C37C02B07515B007FB9A5 /* Recipe */,
 				CD5931072B02C0D8002E40E3 /* Cell */,
 				CD605E2B2AFD923200B55C78 /* LaunchScreen.storyboard */,
@@ -190,6 +202,7 @@
 				CD605E402AFDFF0000B55C78 /* SettingsController.swift */,
 				CD605E432AFE15E500B55C78 /* TabController.swift */,
 				CD59310A2B0490E4002E40E3 /* RecipesController.swift */,
+				CD3168F42B20DD2200015932 /* RecipeDetailsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -322,6 +335,7 @@
 				CD5931092B02C0E8002E40E3 /* CustomIngredientCell.swift in Sources */,
 				CD605E3D2AFDFC0000B55C78 /* SearchController.swift in Sources */,
 				CD5C37C72B075535007FB9A5 /* RecipeModel.swift in Sources */,
+				CD3168F82B20E5AF00015932 /* CustomRecipeIngredientsDetails.swift in Sources */,
 				CD59310B2B0490E4002E40E3 /* RecipesController.swift in Sources */,
 				CD5C37BF2B074E5C007FB9A5 /* Recipe.swift in Sources */,
 				CD5C37C52B07552D007FB9A5 /* RecipeNetwork.swift in Sources */,
@@ -329,6 +343,7 @@
 				CD605E412AFDFF0000B55C78 /* SettingsController.swift in Sources */,
 				CD605E212AFD923100B55C78 /* AppDelegate.swift in Sources */,
 				CD5C37C22B075172007FB9A5 /* CustomeRecipeCell.swift in Sources */,
+				CD3168F52B20DD2200015932 /* RecipeDetailsController.swift in Sources */,
 				CD605E232AFD923100B55C78 /* SceneDelegate.swift in Sources */,
 				CD5C37BD2B074E52007FB9A5 /* RecipeService.swift in Sources */,
 				CD5931062B02A5CA002E40E3 /* Ingredient.swift in Sources */,
