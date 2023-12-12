@@ -81,7 +81,7 @@ class SearchController: UIViewController {
         self.setupStyle()
         self.setupSubViews()
         self.setupLayout()
-        //self.setupGesture()
+        self.setupGesture()
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -90,7 +90,7 @@ class SearchController: UIViewController {
         self.tableView.rowHeight = 70
         self.tableView.backgroundColor = UIColor.clear
 
-        //self.chooseIngredientTextField.delegate = self
+        self.chooseIngredientTextField.delegate = self
     }
     
     // MARK: - Private
@@ -185,10 +185,10 @@ class SearchController: UIViewController {
         ])
     }
     
-    /*private func setupGesture() {
+    private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
-    }*/
+    }
     
     // MARK: - Action
     @objc func add() {
@@ -217,9 +217,9 @@ class SearchController: UIViewController {
         recipesController.searchForRecipes()
     }
     
-    /*@objc private func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+    @objc private func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         chooseIngredientTextField.resignFirstResponder()
-    }*/
+    }
     
     // MARK: - Core
 }
@@ -246,10 +246,10 @@ extension SearchController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-/*extension SearchController: UITextFieldDelegate {
+extension SearchController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-}*/
+}
 

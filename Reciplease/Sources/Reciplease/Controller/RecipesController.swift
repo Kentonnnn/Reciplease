@@ -28,7 +28,7 @@ class RecipesController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.setupStyle()
         self.setupSubViews()
         self.setupLayout()

@@ -11,6 +11,24 @@ class RecipeDetailsController: UIViewController {
     
     // MARK: - Property
     var recipe: Recipes?
+
+    let fullText = "You can find all the necessary instructions by clicking\non 'read more'. This will redirect you to the Edamam\nwebsite, providing you with all the steps needed for the\nsuccessful preparation of this recipe... Read More"
+
+    
+    // MARK: - Views
+    
+    private lazy var scrollView: UIScrollView = {
+       let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.isUserInteractionEnabled = true
+        return scrollView
+    }()
+    
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private lazy var ingredientsTableView: UITableView = {
         let tableView = UITableView()
@@ -20,10 +38,7 @@ class RecipeDetailsController: UIViewController {
         tableView.register(CustomRecipeIngredientsDetails.self, forCellReuseIdentifier: CustomRecipeIngredientsDetails.cellIdentifier)
         return tableView
     }()
-
-    let fullText = "You can find all the necessary instructions by clicking\non 'read more'. This will redirect you to the Edamam\nwebsite, providing you with all the steps needed for the\nsuccessful preparation of this recipe... Read More"
     
-    // MARK: - Views
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -60,6 +75,7 @@ class RecipeDetailsController: UIViewController {
         label.numberOfLines = 0
         return label
     }()
+
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -89,6 +105,7 @@ class RecipeDetailsController: UIViewController {
         }
         
         self.recipeImageView.layer.cornerRadius = 10
+        //self.recipeImageView.contentMode = .scaleAspectFit
         self.recipeImageView.clipsToBounds = true
         
         let attributedString = NSMutableAttributedString(string: fullText)
@@ -98,7 +115,7 @@ class RecipeDetailsController: UIViewController {
 
             attributedString.addAttribute(.foregroundColor, value: UIColor.systemIndigo, range: nsRange)
             attributedString.addAttribute(.link, value: "https://www.google.com", range: nsRange)
-            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 13), range: nsRange)
+            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 20), range: nsRange)
         }
 
         self.instructionTextView.attributedText = attributedString
@@ -114,36 +131,52 @@ class RecipeDetailsController: UIViewController {
     }
     
     func setupSubViews() {
-        self.view.addSubview(self.titleLabel)
-        self.view.addSubview(self.recipeImageView)
-        self.view.addSubview(self.recipeLabel)
-        self.view.addSubview(self.instructionTextView)
-        self.view.addSubview(self.ingredientLabel)
-        self.view.addSubview(self.ingredientsTableView)
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.containerView)
+        
+        self.containerView.addSubview(self.titleLabel)
+        self.containerView.addSubview(self.recipeImageView)
+        self.containerView.addSubview(self.recipeLabel)
+        self.containerView.addSubview(self.instructionTextView)
+        self.containerView.addSubview(self.ingredientLabel)
+        self.containerView.addSubview(self.ingredientsTableView)
     }
     
     func setupLayout() {
         NSLayoutConstraint.activate([
-            self.titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            self.titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            
+            self.containerView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            self.containerView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+            self.containerView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
+            self.containerView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
+            self.containerView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
+
+            self.titleLabel.topAnchor.constraint(equalTo: self.containerView.safeAreaLayoutGuide.topAnchor),
+            self.titleLabel.centerXAnchor.constraint(equalTo: self.containerView.centerXAnchor),
             
             self.recipeImageView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 20),
-            self.recipeImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
-            self.recipeImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30),
+            self.recipeImageView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 30),
+            self.recipeImageView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -30),
             self.recipeImageView.heightAnchor.constraint(equalToConstant: 400),
             
             self.recipeLabel.topAnchor.constraint(equalTo: self.recipeImageView.bottomAnchor, constant: 20),
-            self.recipeLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
+            self.recipeLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 30),
             
             self.instructionTextView.topAnchor.constraint(equalTo: self.recipeLabel.bottomAnchor, constant: 5),
-            self.instructionTextView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25),
+            self.instructionTextView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 25),
             
             self.ingredientLabel.topAnchor.constraint(equalTo: self.instructionTextView.bottomAnchor, constant: 10),
-            self.ingredientLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30),
+            self.ingredientLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 30),
             
-            self.ingredientsTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
-            self.ingredientsTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
-            self.ingredientsTableView.topAnchor.constraint(equalTo: self.ingredientLabel.bottomAnchor, constant: 10)
+            self.ingredientsTableView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 20),
+            self.ingredientsTableView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -20),
+            self.ingredientsTableView.topAnchor.constraint(equalTo: self.ingredientLabel.bottomAnchor, constant: 10),
+            self.ingredientsTableView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor),
+            self.ingredientsTableView.heightAnchor.constraint(equalToConstant: 400)
         ])
     }
     
