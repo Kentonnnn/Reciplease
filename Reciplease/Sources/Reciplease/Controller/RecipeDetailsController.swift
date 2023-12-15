@@ -75,6 +75,13 @@ class RecipeDetailsController: UIViewController {
         label.numberOfLines = 0
         return label
     }()
+    
+    private lazy var totalTimeRecipe: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        return label
+    }()
 
     
     // MARK: - LifeCycle
@@ -96,7 +103,6 @@ class RecipeDetailsController: UIViewController {
         self.titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
         
         self.recipeLabel.text = recipe?.label
-        self.recipeLabel.textAlignment = .center
         self.recipeLabel.font = UIFont.boldSystemFont(ofSize: 20)
         self.recipeLabel.lineBreakMode = .byWordWrapping
         
@@ -105,7 +111,6 @@ class RecipeDetailsController: UIViewController {
         }
         
         self.recipeImageView.layer.cornerRadius = 10
-        //self.recipeImageView.contentMode = .scaleAspectFit
         self.recipeImageView.clipsToBounds = true
         
         let attributedString = NSMutableAttributedString(string: fullText)
@@ -124,10 +129,22 @@ class RecipeDetailsController: UIViewController {
         self.instructionTextView.linkTextAttributes = [
             .foregroundColor: UIColor.systemIndigo
         ]
+        self.instructionTextView.textColor = .gray
         
         self.ingredientLabel.text = "Ingredients"
-        self.ingredientLabel.textAlignment = .center
         self.ingredientLabel.font = UIFont.boldSystemFont(ofSize: 17)
+        
+        if let totalTime = recipe?.totalTime {
+            self.totalTimeRecipe.text = "\(totalTime) mn"
+        } else {
+            self.totalTimeRecipe.text = "N/A"
+        }
+        self.totalTimeRecipe.backgroundColor = UIColor(red: 0.99, green: 0.94, blue: 0.87, alpha: 1)
+        self.totalTimeRecipe.textColor = UIColor(red: 0.99, green: 0.768, blue: 0.50, alpha: 1)
+        self.totalTimeRecipe.textAlignment = .center
+        self.totalTimeRecipe.font = UIFont.boldSystemFont(ofSize: 13)
+        self.totalTimeRecipe.layer.cornerRadius = 5
+        self.totalTimeRecipe.clipsToBounds = true
     }
     
     func setupSubViews() {
@@ -140,6 +157,7 @@ class RecipeDetailsController: UIViewController {
         self.containerView.addSubview(self.instructionTextView)
         self.containerView.addSubview(self.ingredientLabel)
         self.containerView.addSubview(self.ingredientsTableView)
+        self.containerView.addSubview(self.totalTimeRecipe)
     }
     
     func setupLayout() {
@@ -165,18 +183,24 @@ class RecipeDetailsController: UIViewController {
             
             self.recipeLabel.topAnchor.constraint(equalTo: self.recipeImageView.bottomAnchor, constant: 20),
             self.recipeLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 30),
+            self.recipeLabel.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -30),
             
             self.instructionTextView.topAnchor.constraint(equalTo: self.recipeLabel.bottomAnchor, constant: 5),
             self.instructionTextView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 25),
             
-            self.ingredientLabel.topAnchor.constraint(equalTo: self.instructionTextView.bottomAnchor, constant: 10),
+            self.ingredientLabel.topAnchor.constraint(equalTo: self.instructionTextView.bottomAnchor, constant: 15),
             self.ingredientLabel.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 30),
             
-            self.ingredientsTableView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 20),
-            self.ingredientsTableView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -20),
-            self.ingredientsTableView.topAnchor.constraint(equalTo: self.ingredientLabel.bottomAnchor, constant: 10),
+            self.ingredientsTableView.leadingAnchor.constraint(equalTo: self.containerView.leadingAnchor, constant: 30),
+            self.ingredientsTableView.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -30),
+            self.ingredientsTableView.topAnchor.constraint(equalTo: self.totalTimeRecipe.bottomAnchor, constant: 10),
             self.ingredientsTableView.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor),
-            self.ingredientsTableView.heightAnchor.constraint(equalToConstant: 400)
+            self.ingredientsTableView.heightAnchor.constraint(equalToConstant: 400),
+            
+            self.totalTimeRecipe.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -30),
+            self.totalTimeRecipe.topAnchor.constraint(equalTo: self.instructionTextView.bottomAnchor, constant: 10),
+            self.totalTimeRecipe.heightAnchor.constraint(equalToConstant: 35),
+            self.totalTimeRecipe.widthAnchor.constraint(equalToConstant: 65)
         ])
     }
     
