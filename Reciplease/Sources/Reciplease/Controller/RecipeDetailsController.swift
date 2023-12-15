@@ -106,6 +106,15 @@ class RecipeDetailsController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let recipe = recipe {
+            iconFavoritedRecipe = FavoriteRecipes.shared.isRecipeFavorite(recipe)
+            updateFavoriteIcon()
+        }
+    }
+    
     // MARK: - Private
     func setupStyle() {
         self.view.backgroundColor = .white
@@ -227,10 +236,33 @@ class RecipeDetailsController: UIViewController {
     @objc private func favoriteRecipeTapped() {
         iconFavoritedRecipe.toggle()
         
+        updateFavoriteIcon()
+
         if iconFavoritedRecipe {
-            favoriteRecipeImageView.image = UIImage(named: "star")
-        } else {
             favoriteRecipeImageView.image = UIImage(named: "star.fill")
+            // Ajoutez la recette aux favoris
+            if let recipe = recipe {
+                FavoriteRecipes.shared.addRecipeToFavorites(recipe)
+            }
+        } else {
+            favoriteRecipeImageView.image = UIImage(named: "star")
+            // Retirez la recette des favoris
+            if let recipe = recipe {
+                FavoriteRecipes.shared.removeRecipeFromFavorites(recipe)
+            }
+        }
+
+        // Mettez à jour la table view dans FavoriteController
+        if let favoriteController = navigationController?.viewControllers.first(where: { $0 is FavoriteController }) as? FavoriteController {
+            favoriteController.tableView.reloadData()
+        }
+    }
+
+    private func updateFavoriteIcon() {
+        if iconFavoritedRecipe {
+            favoriteRecipeImageView.image = UIImage(named: "star.fill")
+        } else {
+            favoriteRecipeImageView.image = UIImage(named: "star")
         }
     }
     
