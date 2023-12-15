@@ -25,7 +25,6 @@ class TabController: UITabBarController, UITabBarControllerDelegate {
             self.tabBar.isTranslucent = true
             self.tabBar.tintColor = .systemIndigo
 
-            // Ajouter customTabBarView au-dessus de la tabBar
             self.view.addSubview(customTabBarView)
             self.view.bringSubviewToFront(self.tabBar)
         }

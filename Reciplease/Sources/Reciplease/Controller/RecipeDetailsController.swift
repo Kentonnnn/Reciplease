@@ -14,6 +14,7 @@ class RecipeDetailsController: UIViewController {
 
     let fullText = "You can find all the necessary instructions by clicking\non 'read more'. This will redirect you to the Edamam\nwebsite, providing you with all the steps needed for the\nsuccessful preparation of this recipe... Read More"
 
+    private var iconFavoritedRecipe = false
     
     // MARK: - Views
     
@@ -82,7 +83,18 @@ class RecipeDetailsController: UIViewController {
         label.numberOfLines = 0
         return label
     }()
-
+    
+    private lazy var favoriteRecipeImageView: UIImageView = {
+       let imageView = UIImageView()
+        imageView.image = UIImage(named: "star")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(favoriteRecipeTapped))
+        imageView.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
+        
+        return imageView
+    }()
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -145,10 +157,13 @@ class RecipeDetailsController: UIViewController {
         self.totalTimeRecipe.font = UIFont.boldSystemFont(ofSize: 13)
         self.totalTimeRecipe.layer.cornerRadius = 5
         self.totalTimeRecipe.clipsToBounds = true
+        
     }
     
     func setupSubViews() {
         self.view.addSubview(self.scrollView)
+        self.view.addSubview(self.favoriteRecipeImageView)
+        
         self.scrollView.addSubview(self.containerView)
         
         self.containerView.addSubview(self.titleLabel)
@@ -200,8 +215,23 @@ class RecipeDetailsController: UIViewController {
             self.totalTimeRecipe.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -30),
             self.totalTimeRecipe.topAnchor.constraint(equalTo: self.instructionTextView.bottomAnchor, constant: 10),
             self.totalTimeRecipe.heightAnchor.constraint(equalToConstant: 35),
-            self.totalTimeRecipe.widthAnchor.constraint(equalToConstant: 65)
+            self.totalTimeRecipe.widthAnchor.constraint(equalToConstant: 65),
+            
+            self.favoriteRecipeImageView.heightAnchor.constraint(equalToConstant: 30),
+            self.favoriteRecipeImageView.widthAnchor.constraint(equalToConstant: 30),
+            self.favoriteRecipeImageView.topAnchor.constraint(equalTo: self.recipeImageView.topAnchor, constant: -15),
+            self.favoriteRecipeImageView.trailingAnchor.constraint(equalTo: self.recipeImageView.trailingAnchor, constant: 10)
         ])
+    }
+    
+    @objc private func favoriteRecipeTapped() {
+        iconFavoritedRecipe.toggle()
+        
+        if iconFavoritedRecipe {
+            favoriteRecipeImageView.image = UIImage(named: "star")
+        } else {
+            favoriteRecipeImageView.image = UIImage(named: "star.fill")
+        }
     }
     
     // MARK: - Action
