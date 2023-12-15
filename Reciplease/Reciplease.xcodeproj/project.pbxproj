@@ -27,6 +27,7 @@
 		CD605E3F2AFDFC4700B55C78 /* FavoriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD605E3E2AFDFC4700B55C78 /* FavoriteController.swift */; };
 		CD605E412AFDFF0000B55C78 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD605E402AFDFF0000B55C78 /* SettingsController.swift */; };
 		CD605E442AFE15E500B55C78 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD605E432AFE15E500B55C78 /* TabController.swift */; };
+		CDD59B3F2B2C41C10004EB5E /* FavoriteRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD59B3E2B2C41C10004EB5E /* FavoriteRecipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		CD605E3E2AFDFC4700B55C78 /* FavoriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteController.swift; sourceTree = "<group>"; };
 		CD605E402AFDFF0000B55C78 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		CD605E432AFE15E500B55C78 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
+		CDD59B3E2B2C41C10004EB5E /* FavoriteRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRecipe.swift; sourceTree = "<group>"; };
 		FFBD0F13F7DED260E997B1BC /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -210,12 +212,21 @@
 		CD605E392AFD95E400B55C78 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CDD59B3D2B2C41A70004EB5E /* FavoriteRecipe */,
 				CD5C37BB2B074E1B007FB9A5 /* Recipe */,
 				CD5C37BA2B074E12007FB9A5 /* Ingredient */,
 				CD5C37C42B07552D007FB9A5 /* RecipeNetwork.swift */,
 				CD5C37C62B075535007FB9A5 /* RecipeModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CDD59B3D2B2C41A70004EB5E /* FavoriteRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				CDD59B3E2B2C41C10004EB5E /* FavoriteRecipe.swift */,
+			);
+			path = FavoriteRecipe;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,6 +350,7 @@
 				CD59310B2B0490E4002E40E3 /* RecipesController.swift in Sources */,
 				CD5C37BF2B074E5C007FB9A5 /* Recipe.swift in Sources */,
 				CD5C37C52B07552D007FB9A5 /* RecipeNetwork.swift in Sources */,
+				CDD59B3F2B2C41C10004EB5E /* FavoriteRecipe.swift in Sources */,
 				CD605E442AFE15E500B55C78 /* TabController.swift in Sources */,
 				CD605E412AFDFF0000B55C78 /* SettingsController.swift in Sources */,
 				CD605E212AFD923100B55C78 /* AppDelegate.swift in Sources */,
