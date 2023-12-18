@@ -252,7 +252,6 @@ class RecipeDetailsController: UIViewController {
             }
         }
 
-        // Mettez à jour la table view dans FavoriteController
         if let favoriteController = navigationController?.viewControllers.first(where: { $0 is FavoriteController }) as? FavoriteController {
             favoriteController.tableView.reloadData()
         }

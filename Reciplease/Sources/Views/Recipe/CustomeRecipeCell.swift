@@ -12,7 +12,6 @@ class CustomRecipeCell: UITableViewCell {
     private lazy var blackRectangleView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .black
         return view
     }()
     
@@ -43,9 +42,14 @@ class CustomRecipeCell: UITableViewCell {
     }
     
     private func setupStyle() {
-        self.containerView.backgroundColor = UIColor(red: 0.96, green: 0.97, blue: 0.97, alpha: 1)
+        self.contentView.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
+        self.containerView.layer.cornerRadius = 10
+        self.containerView.clipsToBounds = true
         
-        self.clipsToBounds = true
+        self.blackRectangleView.backgroundColor = UIColor(red: 0.98, green: 0.47, blue: 0.25, alpha: 1)
+        self.blackRectangleView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        self.blackRectangleView.layer.cornerRadius = 5
+        self.blackRectangleView.clipsToBounds = true
         
         self.recipeLabel.textColor = .white
         self.recipeLabel.font = UIFont.boldSystemFont(ofSize: 17)
@@ -60,10 +64,13 @@ class CustomRecipeCell: UITableViewCell {
         self.recipeImageView.contentMode = .scaleAspectFill
         self.recipeImageView.clipsToBounds = true
         
-        self.totalTimeLabel.backgroundColor = .black
-        self.totalTimeLabel.textColor = .white
+        self.totalTimeLabel.backgroundColor = .white
+        self.totalTimeLabel.textColor = .black
         self.totalTimeLabel.textAlignment = .center
         self.totalTimeLabel.font = UIFont.boldSystemFont(ofSize: 13)
+        self.totalTimeLabel.layer.maskedCorners = [.layerMinXMaxYCorner]
+        self.totalTimeLabel.layer.cornerRadius = 20
+        self.totalTimeLabel.clipsToBounds = true
     }
     
     func setupView() {
@@ -109,10 +116,10 @@ class CustomRecipeCell: UITableViewCell {
             self.ingredientLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.containerView.trailingAnchor, constant: -10),
             self.ingredientLabel.bottomAnchor.constraint(equalTo: self.containerView.bottomAnchor, constant: -5),
                     
-            self.totalTimeLabel.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor, constant: -10),
-            self.totalTimeLabel.topAnchor.constraint(equalTo: self.containerView.topAnchor, constant: 10),
+            self.totalTimeLabel.trailingAnchor.constraint(equalTo: self.containerView.trailingAnchor),
+            self.totalTimeLabel.topAnchor.constraint(equalTo: self.containerView.topAnchor),
             self.totalTimeLabel.heightAnchor.constraint(equalToConstant: 40),
-            self.totalTimeLabel.widthAnchor.constraint(equalToConstant: 60)
+            self.totalTimeLabel.widthAnchor.constraint(equalToConstant: 80)
         ])
     }
 }
