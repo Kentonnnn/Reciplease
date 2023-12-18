@@ -21,9 +21,7 @@ struct Recipes: Decodable {
     let image: String?
     let ingredientLines: [String]
     let totalTime: Int?
-    // Ajoutez d'autres propriétés si nécessaire
 
-    // Ajoutez une initialisation personnalisée pour prendre en charge la clé "id" manquante
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .uri)
@@ -33,14 +31,12 @@ struct Recipes: Decodable {
         self.totalTime = try container.decodeIfPresent(Int.self, forKey: .totalTime)
     }
 
-    // Déclarez les clés que vous attendez dans le JSON
     enum CodingKeys: String, CodingKey {
         case uri
         case label
         case image
         case ingredientLines
         case totalTime
-        // Déclarez d'autres clés si nécessaire
     }
 }
 

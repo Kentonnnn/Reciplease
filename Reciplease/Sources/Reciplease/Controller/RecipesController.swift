@@ -43,8 +43,8 @@ class RecipesController: UIViewController {
     
     // MARK: - Private
     func setupStyle() {
-        self.view.backgroundColor = .white
-        
+        self.view.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
+
         self.titleLabel.text = "Reciplease"
         self.titleLabel.textAlignment = .center
         self.titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
